@@ -5,10 +5,20 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var ejs = require("ejs");
 var cors = require("cors");
+var mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/login");
+var feedbackRouter = require("./routes/feedback");
+
+mongoose.connect("mongodb://localhost:27017/Tea");
+
+const db = mongoose.connection;
+
+db.on("connected", (req, res) => {
+  console.log("Database connected succesfully");
+});
 
 var app = express();
 
@@ -28,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
+app.use("/feedback", feedbackRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

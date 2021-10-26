@@ -4,12 +4,7 @@ const Login = require("../databases/login");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  // res.render("login");
-  const user = new Login();
-  user.username = "umesh";
-  user.password = "umesh";
-  user.save();
-  res.json(user);
+  res.render("login");
 });
 
 router.get("/register", (req, res) => {

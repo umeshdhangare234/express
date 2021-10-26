@@ -1,10 +1,10 @@
 const express = require("express");
-const Login = require("../databases/login");
+const Feedback = require("../databases/feedback");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  Login.find((err, result) => {
+  Feedback.find((err, result) => {
     if (err) {
       throw err;
     } else {
@@ -13,11 +13,11 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/user", (req, res) => {
-  const user = new Login();
-  user.username = req.body.username;
-  user.password = req.body.password;
-  user.save((err, result) => {
+router.post("/", (req, res) => {
+  const newFeedback = new Feedback();
+  newFeedback.feedback = req.body.feedback;
+  newFeedback.rating = req.body.rating;
+  newFeedback.save((err, result) => {
     if (err) {
       throw err;
     } else {
